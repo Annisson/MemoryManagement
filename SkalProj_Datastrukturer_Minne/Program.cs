@@ -53,6 +53,7 @@ namespace SkalProj_Datastrukturer_Minne
                 try
                 {
                     input = Console.ReadLine()![0]; //Tries to set input to the first char in an input line
+                    Console.Clear();
                 }
                 catch (IndexOutOfRangeException) //If the input line is empty, we ask the users for some input.
                 {
@@ -252,6 +253,83 @@ namespace SkalProj_Datastrukturer_Minne
              * Create a switch with cases to push or pop items
              * Make sure to look at the stack after pushing and and poping to see how it behaves
             */
+
+            // 1. Simulera ännu en gång ICA-kön på papper. Denna gång med en stack. Varför är det inte så smart att använda en stack i det här fallet ?
+            // S: Personen som ställer sig i kön först kan potentiellt få stå där för alltid, om kön aldrig tar slut och byggs på hela tiden.
+
+            // 2. Implementera en ReverseText-metod som läser in en sträng från användaren och med hjälp av en stack vänder ordning på teckenföljden för att sedan skriva ut den
+            //    omvända strängen till användaren.
+            // S: Se case 3
+            
+            Stack<string> theStack = new Stack<string>();
+            bool run = true;
+
+            do
+            {
+                Console.WriteLine("\nWelcome to the supermarket checkout!" +
+                    "\n1. Add a customer to the stack" +
+                    "\n2. Remove a person from the stack" +
+                    "\n3. Reverse input" +
+                    "\n0. Return to the main menu.");
+                string input = Console.ReadLine();
+                Console.Clear();
+
+                if (!string.IsNullOrWhiteSpace(input))
+                {
+
+                    switch (input)
+                    {
+                        case "1":
+                            Console.Write("Customer name: ");
+                            string newCustomer = Console.ReadLine();
+                            theStack.Push(newCustomer); 
+                            Console.WriteLine($"Stack count: {theStack.Count}" +
+                                $"\nPeople in the stack:");
+                            foreach (var customer in theStack)
+                            {
+                                Console.WriteLine(customer);
+                            }
+                            break;
+
+                        case "2":
+                            if (theStack.Count == 0)
+                            {
+                                Console.WriteLine("The stack is empty");
+                            }
+                            else
+                            {
+                                theStack.Pop();
+                                Console.WriteLine($"Stack count: {theStack.Count}" +
+                                    $"\nPeople in the stack");
+                                foreach (var customer in theStack)
+                                {
+                                    Console.WriteLine(customer);
+                                }
+                            }
+                            break;
+
+                        case "3":
+                            // TODO: Add ReverseText(); here
+                            break;
+
+                        case "0":
+                            run = false;
+                            break;
+
+                        default:
+                            Console.WriteLine("Please only use 1 to add something to the stack, or 2 to remove someting from the stack");
+                            break;
+                    }
+
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input.");
+                }
+
+
+            } while (run);
+
         }
 
         static void CheckParanthesis()
