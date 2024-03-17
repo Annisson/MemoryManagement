@@ -309,7 +309,7 @@ namespace SkalProj_Datastrukturer_Minne
                             break;
 
                         case "3":
-                            // TODO: Add ReverseText(); here
+                            ReverseText(); // Fråga 2
                             break;
 
                         case "0":
@@ -317,7 +317,7 @@ namespace SkalProj_Datastrukturer_Minne
                             break;
 
                         default:
-                            Console.WriteLine("Please only use 1 to add something to the stack, or 2 to remove someting from the stack");
+                            Console.WriteLine("Please only use 1 to add something to the stack, 2 to remove someting from the stack, or 3 to reverse input");
                             break;
                     }
 
@@ -329,6 +329,35 @@ namespace SkalProj_Datastrukturer_Minne
 
 
             } while (run);
+
+        }
+
+        static void ReverseText()
+        {
+            Stack<char> reverseStack = new Stack<char>(); // Skapar en Stack av typen char för att spara ned user input i enskilda characters för att kunna vända på orden.
+            string reverseOutput = "";
+
+            Console.Write("Please enter a word or a sentence: ");
+            string userInput = Console.ReadLine();
+
+            if (!string.IsNullOrWhiteSpace(userInput))
+            {
+                foreach (char item in userInput) // För varje character i user input, pusha(skicka/spara) till stacken. Dvs varje bokstav/siffra/symbol en och en.
+                {
+                    reverseStack.Push(item);
+                }
+
+                while (reverseStack.Count > 0) // Sålänge det finns minst en character så ska de poppas(plockas fram) och adderas till strängen reverseOutput.
+                {
+                    reverseOutput += reverseStack.Pop();
+                }
+
+                Console.WriteLine($"Your input in reverse: {reverseOutput}"); // Printa färdigställda order/meningen i reverse order mot vad användaren skickade in.
+            }
+            else
+            {
+                Console.WriteLine("Invalid input.");
+            }
 
         }
 
