@@ -282,23 +282,23 @@ namespace SkalProj_Datastrukturer_Minne
                         case "1":
                             Console.Write("Customer name: ");
                             string newCustomer = Console.ReadLine();
-                            theStack.Push(newCustomer); 
-                            Console.WriteLine($"Stack count: {theStack.Count}" +
+                            theStack.Push(newCustomer);  // Lägger till user input till stacken med push-metoden
+                            Console.WriteLine($"Stack count: {theStack.Count}" + // Skriver ut hur många värden som finns lagrade i stacken just nu
                                 $"\nPeople in the stack:");
-                            foreach (var customer in theStack)
+                            foreach (var customer in theStack) // Går igenom varje värde(kund) som finns lagrade i stacken och skriver ut i konsollen
                             {
                                 Console.WriteLine(customer);
                             }
                             break;
 
                         case "2":
-                            if (theStack.Count == 0)
+                            if (theStack.Count == 0) // Om stacken är tom
                             {
                                 Console.WriteLine("The stack is empty");
                             }
                             else
                             {
-                                theStack.Pop();
+                                theStack.Pop(); // Pop-metoden används här för att ta bort ett värde ur stacken och det är alltid det senaste värdet som tas bort, dvs det som lades till sist.
                                 Console.WriteLine($"Stack count: {theStack.Count}" +
                                     $"\nPeople in the stack");
                                 foreach (var customer in theStack)
