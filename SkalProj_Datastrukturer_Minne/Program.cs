@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace SkalProj_Datastrukturer_Minne
 {
@@ -177,6 +178,68 @@ namespace SkalProj_Datastrukturer_Minne
              * Create a switch with cases to enqueue items or dequeue items
              * Make sure to look at the queue after Enqueueing and Dequeueing to see how it behaves
             */
+            Queue<string> theQueue = new Queue<string>();
+            bool run = true;
+
+            do
+            {
+                Console.WriteLine("\nWelcome to the supermarket checkout!" +
+                    "\nPlease enter 1 to add a customer to the queue, 2 to remove a person from the queue, or 0 to return to the main menu.");
+                string input = Console.ReadLine();
+                Console.Clear();
+
+                if (!string.IsNullOrWhiteSpace(input))
+                {
+
+                    switch (input)
+                    {
+                        case "1":
+                            Console.Write("Customer name: ");
+                            string newCustomer = Console.ReadLine();
+                            theQueue.Enqueue(newCustomer);
+                            Console.WriteLine($"Queue count: {theQueue.Count}" +
+                                $"\nPeople in the queue:");
+                            foreach (var customer in theQueue)
+                            {
+                                Console.WriteLine(customer);
+                            }
+                            break;
+
+                        case "2":
+                            if (theQueue.Count == 0)
+                            {
+                                Console.WriteLine("The queue is empty");
+                            }
+                            else
+                            {
+                                theQueue.Dequeue();
+                                Console.WriteLine($"Queue count: {theQueue.Count}" +
+                                    $"\nPeople in the queue");
+                                foreach (var customer in theQueue)
+                                {
+                                    Console.WriteLine(customer);
+                                }
+                            }
+                            break;
+
+                        case "0":
+                            run = false;
+                            break;
+
+                        default:
+                            Console.WriteLine("Please only use 1 to add something to the queue, or 2 to remove someting from the queue");
+                            break;
+                    }
+
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input.");
+                }
+
+
+            } while (run);
+
         }
 
         /// <summary>
