@@ -179,7 +179,7 @@ namespace SkalProj_Datastrukturer_Minne
              * Create a switch with cases to enqueue items or dequeue items
              * Make sure to look at the queue after Enqueueing and Dequeueing to see how it behaves
             */
-            Queue<string> theQueue = new Queue<string>();
+            Queue<string> theQueue = new Queue<string>(); // Instansierar en ny Queue av typen string
             bool run = true;
 
             do
@@ -197,24 +197,24 @@ namespace SkalProj_Datastrukturer_Minne
                         case "1":
                             Console.Write("Customer name: ");
                             string newCustomer = Console.ReadLine();
-                            theQueue.Enqueue(newCustomer);
-                            Console.WriteLine($"Queue count: {theQueue.Count}" +
+                            theQueue.Enqueue(newCustomer); // Lägger till user input(newCustomer) i queuen
+                            Console.WriteLine($"Queue count: {theQueue.Count}" + // Skriver ut hur många värden som finns sparade i queuen just nu
                                 $"\nPeople in the queue:");
-                            foreach (var customer in theQueue)
+                            foreach (var customer in theQueue) // Foreach för att skriva ut varje värde som sparats i queuen, dvs varje kund som står i kön i detta fall.
                             {
                                 Console.WriteLine(customer);
                             }
                             break;
 
                         case "2":
-                            if (theQueue.Count == 0)
+                            if (theQueue.Count == 0) // Om queuen är tom
                             {
                                 Console.WriteLine("The queue is empty");
                             }
                             else
                             {
-                                theQueue.Dequeue();
-                                Console.WriteLine($"Queue count: {theQueue.Count}" +
+                                theQueue.Dequeue(); // Tar bort ett värde från queuen, här väljs inte ett värde/en person utan det är alltid den som lagts till förts som tas bort vilket är varför ingen
+                                Console.WriteLine($"Queue count: {theQueue.Count}" + // user input används när man kör Dequeue. Skriver här ut hur många värden som finns lagrade i queuen just nu.
                                     $"\nPeople in the queue");
                                 foreach (var customer in theQueue)
                                 {
