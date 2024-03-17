@@ -113,34 +113,34 @@ namespace SkalProj_Datastrukturer_Minne
 
                 if (!string.IsNullOrWhiteSpace(input))
                 {
-                    char nav = input[0];
-                    string value = input.Substring(1);
+                    char nav = input[0]; // Sparar första charactern som användaren knappat in
+                    string value = input.Substring(1); // Sparar hela user input med start från index 1, dvs tar inte med första charactern, t.ex. +Alex sparar Alex
                     
-                    switch (nav)
+                    switch (nav) // Hoppar in i antingen case +, -, eller 0 beroende på vad användaren knappat in som sparats i nav-variabeln 
                     {
                         case '+':
-                            theList.Add(value);
+                            theList.Add(value); // Lägger till user input i listan
                             Console.WriteLine($"\"{value}\" was added to the list.");
-                            Console.WriteLine($"List capacity: {theList.Capacity}, count: {theList.Count}");
-                            break;
+                            Console.WriteLine($"List capacity: {theList.Capacity}, count: {theList.Count}"); // Skriv ut nuvarande kapaciteten på listan, dvs hur många platser det totalt finns i listan.
+                            break;                                                          // Skriver sedan ut hur många faktiska platser som är tagna i listan.
 
                         case '-':
-                            theList.Remove(value);
+                            theList.Remove(value); // Tar bort user input från listan(om det fanns med).
                             Console.WriteLine($"\"{value}\" was removed to the list.");
                             Console.WriteLine($"List capacity: {theList.Capacity}, count: {theList.Count}");
                             break;
 
                         case '0':
-                            run = false;
+                            run = false; // Avslutar do-while loopen och returnerar till main menyn
                             break;
 
-                        default:
+                        default: // Om användaren knappat in andra siffror, bokstäver, eller characters som inte finns med i ovan cases.
                             Console.WriteLine("Please only use + to add something to the list, or - to remove someting from the list");
                             break;
                     }
                     
                 }
-                else
+                else // T.ex. om användaren skickar in endast ett space, eller kör enter direkt utan input.
                 {
                     Console.WriteLine("Invalid input.");
                 }
