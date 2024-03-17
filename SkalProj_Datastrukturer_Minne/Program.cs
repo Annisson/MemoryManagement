@@ -10,7 +10,7 @@ namespace SkalProj_Datastrukturer_Minne
         /// <param name="args"></param>
         static void Main()
         {
-            // ~ Teori of fakta ~
+            //    ~ Teori of fakta ~
 
             // 1. Hur fungerar stacken och heapen? Förklara gärna med exempel eller skiss på dess grundläggande funktion
             // S: Stacken fungerar så att det man lägger till och tar bort kommer från det översta lagret, t.ex. som en hög med böcker.
@@ -101,12 +101,70 @@ namespace SkalProj_Datastrukturer_Minne
              * Below you can see some inspirational code to begin working.
             */
 
-            //List<string> theList = new List<string>();
-            //string input = Console.ReadLine();
-            //char nav = input[0];
-            //string value = input.substring(1);
+            List<string> theList = new List<string>();
+            bool run = true;
+            do
+            {
+                Console.WriteLine("\nPlease enter + to add, - to remove, or 0 to return to the main menu.\nFor example +Adam or -Adam to add or remove \"Adam\" from the list");
+                string input = Console.ReadLine();
+                Console.Clear();
 
-            //switch(nav){...}
+                if (!string.IsNullOrWhiteSpace(input))
+                {
+                    char nav = input[0];
+                    string value = input.Substring(1);
+                    
+                    switch (nav)
+                    {
+                        case '+':
+                            theList.Add(value);
+                            Console.WriteLine($"\"{value}\" was added to the list.");
+                            Console.WriteLine($"List capacity: {theList.Capacity}, count: {theList.Count}");
+                            break;
+
+                        case '-':
+                            theList.Remove(value);
+                            Console.WriteLine($"\"{value}\" was removed to the list.");
+                            Console.WriteLine($"List capacity: {theList.Capacity}, count: {theList.Count}");
+                            break;
+
+                        case '0':
+                            run = false;
+                            break;
+
+                        default:
+                            Console.WriteLine("Please only use + to add something to the list, or - to remove someting from the list");
+                            break;
+                    }
+                    
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input.");
+                }
+
+            } while (run);
+
+            // 1. Skriv klart implementationen av ExamineList-metoden så att undersökningen blir genomförbar.
+            // S: Se ovan
+
+            // 2. När ökar listans kapacitet? (Alltså den underliggande arrayens storlek) 
+            // S: Varje gång arrayen i listan blir full, dvs första gången vid 4:e input då den startar med 4st platser. Andra gången vid 8st inputs, tredje vid 16st osv.
+            //
+
+            // 3. Med hur mycket ökar kapaciteten? 
+            // S: Den dubblas i storlek varje gång, först 4*2 = 8, sedan 8*2 = 16, 16*2 = 32...osv
+
+            // 4. Varför ökar inte listans kapacitet i samma takt som element läggs till?
+            // S: Därför att det är mer effektivt att dubblera storleken direkt, istället för att göra en ökning varje gång något läggs till.
+
+            // 5. Minskar kapaciteten när element tas bort ur listan? 
+            // S: Nej, den minskar inte även om element tas bort ur listan.
+
+            // 6. När är det då fördelaktigt att använda en egendefinierad array istället för en lista? 
+            // S: En array är bättre om man vet den exakta storleken i förväg, då är storleken satt direkt istället för att köra en lista som
+            // behöver öka i storlek tills dess att man nått den mängden man behöver.
+
         }
 
         /// <summary>
