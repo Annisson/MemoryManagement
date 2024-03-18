@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 
 namespace SkalProj_Datastrukturer_Minne
 {
@@ -152,7 +153,6 @@ namespace SkalProj_Datastrukturer_Minne
 
             // 2. När ökar listans kapacitet? (Alltså den underliggande arrayens storlek) 
             // S: Varje gång arrayen i listan blir full, dvs första gången vid 4:e input då den startar med 4st platser. Andra gången vid 8st inputs, tredje vid 16st osv.
-            //
 
             // 3. Med hur mycket ökar kapaciteten? 
             // S: Den dubblas i storlek varje gång, först 4*2 = 8, sedan 8*2 = 16, 16*2 = 32...osv
@@ -164,8 +164,8 @@ namespace SkalProj_Datastrukturer_Minne
             // S: Nej, den minskar inte även om element tas bort ur listan.
 
             // 6. När är det då fördelaktigt att använda en egendefinierad array istället för en lista? 
-            // S: En array är bättre om man vet den exakta storleken i förväg, då är storleken satt direkt istället för att köra en lista som
-            // behöver öka i storlek tills dess att man nått den mängden man behöver.
+            // S: En array är bättre om man vet den exakta storleken i förväg, då är storleken satt direkt istället för att köra en lista som behöver öka i storlek tills
+            //    dess att man nått den mängden man behöver.
 
         }
 
@@ -368,6 +368,70 @@ namespace SkalProj_Datastrukturer_Minne
              * Example of correct: (()), {}, [({})],  List<int> list = new List<int>() { 1, 2, 3, 4 };
              * Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );
              */
+
+            // 1. Skapa med hjälp av er nya kunskap funktionalitet för att kontrollera en välformad sträng på papper.Du ska använda dig av någon eller några av de datastrukturer vi
+            //    precis gått igenom.Vilken datastruktur använder du?
+            // S: Jag använder en stack för att spara och checka paranteserna samt en dictionary för att kolla key/value matchningar
+
+
+            // 2.Implementera funktionaliteten i metoden CheckParentheses. Låt programmet läsa in en sträng från användaren och returnera ett svar som reflekterar huruvida
+            //   strängen är välformad eller ej. 
+            // S: Se nedan
+            Dictionary<char, char> charDictionary = new Dictionary<char, char>()
+            {
+                { '(', ')' }, // Key är öppningar, och value är stängningar
+                { '{', '}' },
+                { '[', ']' }
+            };
+            
+            bool run = true;
+
+            do
+            {
+                Stack<char> charStack = new Stack<char>(); // Stack av typen char för att lagra alla paranteser
+                bool charCheck = true; // Används för att checka om det är korrekt eller inte
+
+                Console.WriteLine("\nPlease enter some code including parentheses and/or brackets(or enter 0 to exit): ");
+                string userInput = Console.ReadLine();
+                Console.Clear();
+
+                if (!string.IsNullOrWhiteSpace(userInput))
+                {
+
+                    foreach (char item in userInput) // Söker igenom user input en char i taget
+                    {
+                        if (charDictionary.ContainsKey(item)) // Om user input innehåller några öppningsparanteser (key satt i dictionary ovan)
+                        {
+                            charStack.Push(item); // Sparas i stacken: (  {  [
+                        }
+                        else if(charDictionary.ContainsValue(item)) // Annars om user input innehåller stängningsparanteser (value satt i dictionary ovan)
+                        {
+                            if(charStack.Count == 0 || charDictionary[charStack.Peek()] != item) // Om stacken är tom(dvs inga öppningar finns) eller om den öppningsparantes som ligger överst i stacken
+                            {                                                                   // (peek tjuvtittar utan att röra värdet) INTE matchar den stängning vi checkar nu så är det inte korrekt
+                                charCheck = false; // Sätter false för att få korrekt output till konsollen 
+                            }
+                            else
+                            {
+                                charStack.Pop(); // Plockar ut det översta värdet om det finns värden i stacken, och det översta värdet matchar nuvarande värde som loopen går igenom
+                            }
+                        }
+                    }
+
+                    if (charCheck && charStack.Count == 0) // När man gått igenom alla chars, om charCheck fortfarande är true och stacken är tom så stämmer alla paranteser
+                    {
+                        Console.WriteLine("The string is properly formed.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("The string is NOT properly formed.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input.");
+                }
+
+            } while (run);
 
         }
 
